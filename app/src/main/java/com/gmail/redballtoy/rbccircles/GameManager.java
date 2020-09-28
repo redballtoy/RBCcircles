@@ -1,6 +1,7 @@
 package com.gmail.redballtoy.rbccircles;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 
 import java.util.ArrayList;
@@ -82,8 +83,13 @@ public class GameManager {
     private void checkCollision() {
         //проверяем пересечение c любым из существующих кругов
         for (EnemyCircle circle : enemyCircles) {
+            //при прикосновению к красному кругу игра заканчивается, при
+            //прикосновению к зеленому он исчезает а главный круг увеличивается
+            //на размер зеленого
             if (mainCircle.isIntersect(circle)) {
-                gameEnd();
+                if (circle.getColor() == ) {
+
+                }
             }
 
 
