@@ -3,12 +3,15 @@ package com.gmail.redballtoy.rbccircles;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
+import java.util.ArrayList;
+
 public class GameManager {
+    private static final int MAX_CIRCLES = 10;
     private static int width;
     private static int height;
+    private ArrayList<EnemyCircle> enemyCircles;
     private CanvasView canvasView;
     private MainCircle mainCircle;
-
 
 
     public GameManager(CanvasView canvasView, int w, int h) {
@@ -17,6 +20,21 @@ public class GameManager {
         height = h;
         //переносим всю логику в GameManager
         initMainCircle();
+        initEnemyCircles();
+
+    }
+
+    private void initEnemyCircles() {
+        //выделяем память под коллекцию
+        enemyCircles = new ArrayList<EnemyCircle>();
+        //создание кругов в цикле
+        for (int i = 0; i < MAX_CIRCLES; i++) {
+            EnemyCircle circle;
+            //создать случайный круг
+            circle = EnemyCircle.getRandomCircle();
+            enemyCircles.add(circle);
+
+        }
 
     }
 
@@ -27,6 +45,9 @@ public class GameManager {
 
     public void onDraw() {
         canvasView.drawCircle(mainCircle);
+        for (EnemyCircle circle : enemyCircles) {
+            canvasView.drawCircle(circle);
+        }
 
 
     }
