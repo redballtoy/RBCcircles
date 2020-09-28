@@ -1,5 +1,7 @@
 package com.gmail.redballtoy.rbccircles;
 
+import android.graphics.Color;
+
 //основной круг которым будем упоравлять во время игры
 public class MainCircle extends SimpleCircle {
     public static final int INIT_RADIUS = 50;
@@ -7,6 +9,7 @@ public class MainCircle extends SimpleCircle {
 
     public MainCircle(int x, int y) {
         super(x, y, INIT_RADIUS);
+        setColor(Color.BLUE);
     }
 
     public void moveMainCircleWhenTouchAt(int x1, int y1) {
