@@ -33,10 +33,20 @@ public class GameManager {
             //создать случайный круг
             circle = EnemyCircle.getRandomCircle();
             enemyCircles.add(circle);
+        }
+        //круги меньшего чем наш размера (зеленые) можем съедать,
+        //круги большего чем наш размер (красные) от них убегать
+        calculateAndSetCircleColor();
+    }
+    //круги меньшего чем наш размера (зеленые) можем съедать,
+    //круги большего чем наш размер (красные) от них убегать
+    private void calculateAndSetCircleColor(){
+        for (EnemyCircle circle: enemyCircles){
+            circle.setEnemyOrFoodColorDependsOn(mainCircle);
 
         }
-
     }
+
 
     private void initMainCircle() {
         //переносим всю логику в GameManager
