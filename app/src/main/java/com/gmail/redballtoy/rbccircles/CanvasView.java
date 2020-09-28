@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Display;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
 import android.view.WindowManager;
@@ -42,8 +43,8 @@ public class CanvasView extends View implements ICanvasView {
         width = getMeasuredWidth();
         height = getMeasuredHeight();
         String myLog = "myLog";
-        Log.d(myLog,"Мы добрались в onMeasure\n getMeasuredWidth="
-                + width +"\ngetMeasuredHeight = " + height);
+        Log.d(myLog, "Мы добрались в onMeasure\n getMeasuredWidth="
+                + width + "\ngetMeasuredHeight = " + height);
         initPaint();
         gameManager = new GameManager(this, width, height);
     }
@@ -56,6 +57,7 @@ public class CanvasView extends View implements ICanvasView {
         //устанавливаем что бы кружки заполнялись цветом
         paint.setStyle(Paint.Style.FILL);
     }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -66,7 +68,21 @@ public class CanvasView extends View implements ICanvasView {
 
     @Override
     public void drawCircle(MainCircle circle) {
-        canvas.drawCircle(circle.getX(),circle.getY(),circle.getRadius(),paint);
+        canvas.drawCircle(circle.getX(), circle.getY(), circle.getRadius(), paint);
+    }
 
+    //метод который будет вызван при прикосновении к экрану
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //получаем координаты касания
+        int x = (int) event.getX();
+        int y = (int) event.getY();
+        //определить что за событие произошло
+        if (event.getAction() == MotionEvent.ACTION_MOVE) {
+            gameManager.onTouchEvent(x, y);
+        }
+        //асинхронная перерисовка вьюшки когда не требуется изменение размеров
+        invalidate();
+        return true;
     }
 }

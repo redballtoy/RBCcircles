@@ -30,4 +30,17 @@ public class GameManager {
 
 
     }
+
+    public void onTouchEvent(int x, int y) {
+        //при касании передвинуться в соординаты касания
+        mainCircle.moveMainCircleWhenTouchAt(x, y);
+    }
+
+    public static int getWidth() {
+        return width;
+    }
+
+    public static int getHeight() {
+        return height;
+    }
 }
