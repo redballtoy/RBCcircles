@@ -9,7 +9,7 @@ public class GameManager {
     private static final int MAX_CIRCLES = 10;
     private static int width;
     private static int height;
-    private ArrayList<EnemyCircle> enemyCircles;
+    private ArrayList<EnemyCircle> enemyCircles = new ArrayList<EnemyCircle>();
     private CanvasView canvasView;
     private MainCircle mainCircle;
 
@@ -44,10 +44,11 @@ public class GameManager {
         //круги большего чем наш размер (красные) от них убегать
         calculateAndSetCircleColor();
     }
+
     //круги меньшего чем наш размера (зеленые) можем съедать,
     //круги большего чем наш размер (красные) от них убегать
-    private void calculateAndSetCircleColor(){
-        for (EnemyCircle circle: enemyCircles){
+    private void calculateAndSetCircleColor() {
+        for (EnemyCircle circle : enemyCircles) {
             circle.setEnemyOrFoodColorDependsOn(mainCircle);
 
         }
@@ -71,6 +72,18 @@ public class GameManager {
     public void onTouchEvent(int x, int y) {
         //при касании передвинуться в соординаты касания
         mainCircle.moveMainCircleWhenTouchAt(x, y);
+        //остальные круги тоже двигаются
+        moveCircles();
+
+    }
+
+    //другие круги будут двигаться при только при прикосновению к экрану
+    private void moveCircles() {
+        //пробежались по всем кругам
+        for (EnemyCircle circle : enemyCircles) {
+            //подвинули груг на шаг
+            circle.moveOneStep();
+        }
     }
 
     public static int getWidth() {
