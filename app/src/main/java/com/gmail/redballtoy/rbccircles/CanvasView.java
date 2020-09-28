@@ -10,43 +10,50 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 public class CanvasView extends View {
+    /*переносим всю логику в GameManager
     private MainCircle mainCircle;
-    private Paint paint;
+    private Paint paint;*/
+    private GameManager gameManager;
 
 
-
-
+    //Этот класс оставляем только для отображения, логику игры переносим в
+    //отдельный класс GameManager
     public CanvasView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        gameManager = new GameManager();
+        /*переносим всю логику в GameManager
         initMainCurcle();
         //для рисования на канвасе необходимо определить кисть
-        initPaint();
+        initPaint();*/
     }
 
+     /*переносим всю логику в GameManager
     private void initPaint() {
         paint = new Paint();
         //устававливаем что бы было сглаживание
         paint.setAntiAlias(true);
         //устанавливаем что бы кружки заполнялись цветом
-        paint.setStyle(Paint.Style.FILL);
+        paint.setStyle(Paint.Style.FILL);*/
 
         /*Добавляем инициализацию канвы в шаблон
             <com.gmail.redballtoy.rbccircles.CanvasView
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-        */
-
-
+        *//*
     }
+
 
     private void initMainCurcle() {
         mainCircle = new MainCircle(200, 500);
     }
+    */
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         //рисуем кружки
-        canvas.drawCircle(mainCircle.getX(),mainCircle.getY(),mainCircle.getRadius(),paint);
+        //canvas.drawCircle(mainCircle.getX(), mainCircle.getY(), mainCircle.getRadius(), paint);
+        //при рисовании будем вызывать метод onDraw в классе отвечающем за логику игры
+        gameManager.onDraw(canvas);
     }
 }
