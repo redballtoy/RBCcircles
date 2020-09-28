@@ -25,13 +25,19 @@ public class GameManager {
     }
 
     private void initEnemyCircles() {
+        //получение области занимаемой кругом
+        SimpleCircle mainCircleArea = mainCircle.getCircleArea();
         //выделяем память под коллекцию
         enemyCircles = new ArrayList<EnemyCircle>();
         //создание кругов в цикле
         for (int i = 0; i < MAX_CIRCLES; i++) {
             EnemyCircle circle;
-            //создать случайный круг
-            circle = EnemyCircle.getRandomCircle();
+            //будем пересоздавать круг до тех пор пока он пересекается с нашим
+            //основным кругом
+            do {
+                //создать случайный круг
+                circle = EnemyCircle.getRandomCircle();
+            } while (circle.isIntersect(mainCircleArea));
             enemyCircles.add(circle);
         }
         //круги меньшего чем наш размера (зеленые) можем съедать,
