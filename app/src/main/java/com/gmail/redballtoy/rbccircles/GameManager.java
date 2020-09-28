@@ -72,9 +72,32 @@ public class GameManager {
     public void onTouchEvent(int x, int y) {
         //при касании передвинуться в соординаты касания
         mainCircle.moveMainCircleWhenTouchAt(x, y);
+        //При прикосновению к любому кругу игра останавливается
+        checkCollision();
         //остальные круги тоже двигаются
         moveCircles();
 
+    }
+
+    private void checkCollision() {
+        //проверяем пересечение c любым из существующих кругов
+        for (EnemyCircle circle : enemyCircles) {
+            if (mainCircle.isIntersect(circle)) {
+                gameEnd();
+            }
+
+
+        }
+    }
+
+    //для окончания игры реализуем сброс
+    private void gameEnd() {
+        //восстанавливаем радиус у главного круга
+        mainCircle.initRadius();
+        //переинициализируем вражеские круги
+        initEnemyCircles();
+        //перерисуем холст
+        canvasView.redraw();
     }
 
     //другие круги будут двигаться при только при прикосновению к экрану

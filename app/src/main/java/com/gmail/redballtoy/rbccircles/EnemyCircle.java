@@ -58,5 +58,19 @@ public class EnemyCircle extends SimpleCircle {
         //для этого нужно изменить координаты на некоторое число
         x += dx;
         y += dy;
+
+        //проверка что бы круги не выходили за пределы игровой зоны
+        checkBounds();
+    }
+
+    //проверка что бы круги не выходили за пределы игровой зоны
+    private void checkBounds() {
+        if (x > GameManager.getWidth() || x < 0) {
+            dx = -dx;
+        }
+        if (y > GameManager.getHeight() || y < 0) {
+            dy = -dy;
+        }
+
     }
 }
