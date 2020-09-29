@@ -24,4 +24,8 @@ public class MainCircle extends SimpleCircle {
     public void initRadius() {
         radius = INIT_RADIUS;
     }
+
+    public void growRadius(EnemyCircle circle) {
+        this.radius = this.getRadius() + circle.getRadius();
+    }
 }

@@ -25,7 +25,7 @@ public class EnemyCircle extends SimpleCircle {
         Random random = new Random();
         int x = random.nextInt(GameManager.getWidth());
         int y = random.nextInt(GameManager.getHeight());
-        int radius = 20 + random.nextInt(GameManager.getWidth()) / 8;
+        int radius = 2 + random.nextInt(GameManager.getWidth()) / 10;
         //добавим что бы направление и скорость тоже были случайными
         int dx = 1 + random.nextInt(RANDOM_SPEED);
         int dy = 1 + random.nextInt(RANDOM_SPEED);

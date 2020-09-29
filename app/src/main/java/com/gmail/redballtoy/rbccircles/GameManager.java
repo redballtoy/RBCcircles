@@ -3,16 +3,20 @@ package com.gmail.redballtoy.rbccircles;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 
 import java.util.ArrayList;
 
 public class GameManager {
-    private static final int MAX_CIRCLES = 10;
+    private static final int MAX_CIRCLES = 5;
+    private static final int ENEMY_COLOR = Color.rgb(200, 0, 0);
+    private static final int FOOD_COLOR = Color.rgb(0, 200, 0);
     private static int width;
     private static int height;
     private ArrayList<EnemyCircle> enemyCircles = new ArrayList<EnemyCircle>();
     private CanvasView canvasView;
     private MainCircle mainCircle;
+    private String myLog="myLog";
 
 
     public GameManager(CanvasView canvasView, int w, int h) {
@@ -87,12 +91,19 @@ public class GameManager {
             //прикосновению к зеленому он исчезает а главный круг увеличивается
             //на размер зеленого
             if (mainCircle.isIntersect(circle)) {
-                if (circle.getColor() == ) {
-
+                if (circle.getColor() == ENEMY_COLOR) {
+                    Log.d(myLog, "circle.getColor() ENEMY_COLOR = " + ENEMY_COLOR);
+                    gameEnd();
+                    return;
+                }else {
+                    Log.d(myLog, "circle.getColor() FOOD_COLOR = " + FOOD_COLOR);
+                    mainCircle.growRadius(circle);
+                    enemyCircles.remove(circle);
+                    calculateAndSetCircleColor();
+                    break;
                 }
+
             }
-
-
         }
     }
 
