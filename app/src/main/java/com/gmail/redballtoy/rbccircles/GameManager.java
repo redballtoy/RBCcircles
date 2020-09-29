@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -93,7 +94,7 @@ public class GameManager {
             if (mainCircle.isIntersect(circle)) {
                 if (circle.getColor() == ENEMY_COLOR) {
                     Log.d(myLog, "circle.getColor() ENEMY_COLOR = " + ENEMY_COLOR);
-                    gameEnd();
+                    gameEnd("You Loss!");
                     return;
                 }else {
                     Log.d(myLog, "circle.getColor() FOOD_COLOR = " + FOOD_COLOR);
@@ -104,18 +105,23 @@ public class GameManager {
                 }
 
             }
+            if (enemyCircles.isEmpty()) {
+                gameEnd("You Win!");
+
+            }
         }
     }
 
     //для окончания игры реализуем сброс
-    private void gameEnd() {
-        //восстанавливаем радиус у главного круга
-        mainCircle.initRadius();
-        //переинициализируем вражеские круги
-        initEnemyCircles();
-        //перерисуем холст
-        canvasView.redraw();
-    }
+    private void gameEnd(String msg) {
+        canvasView.showMessage(msg);
+            //восстанавливаем радиус у главного круга
+            mainCircle.initRadius();
+            //переинициализируем вражеские круги
+            initEnemyCircles();
+            //перерисуем холст
+            canvasView.redraw();
+        }
 
     //другие круги будут двигаться при только при прикосновению к экрану
     private void moveCircles() {

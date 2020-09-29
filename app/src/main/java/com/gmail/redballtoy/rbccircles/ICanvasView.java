@@ -8,4 +8,6 @@ public interface ICanvasView {
 
     //перерисовка вью
     void redraw();
+
+    void showMessage(String msg);
 }
